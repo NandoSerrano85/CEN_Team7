@@ -41,6 +41,9 @@ This is the install guide that you would need to install all dependencies for wi
 ## Contributors
 
 **Fernando Serrano**
+
 **Adrian Serrano**
+
 **Mathew Silva**
+
 **Felipe Zuniga**
