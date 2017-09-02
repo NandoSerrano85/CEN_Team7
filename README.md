@@ -9,10 +9,10 @@ You will be creating an online web application bookstore which targets a particu
 
 What you would need in-order to run this application is:
 
-    * **M**angoDB
-    * **E**xpressJS
-    * **R**eactJS
-    * **N**odeJS
+    * **M** angoDB
+    * **E** xpressJS
+    * **R** eactJS
+    * **N** odeJS
 
 ### Installation Guide
 
