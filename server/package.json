@@ -1,0 +1,18 @@
+{
+  "name": "geekbookserver",
+  "version": "1.0.0",
+  "description": "server for geek book website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Fernando Serrano",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.12"
+  }
+}
