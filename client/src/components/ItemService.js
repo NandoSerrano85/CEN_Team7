@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-class itemService {
+class ItemService {
 
     sendData(data){
-        axios.post('http://localhost:4200/items/add/post', {
+        axios.post('http://localhost:4200/admin/add-item/post', {
             item: data
         })
         .then(function (response) {
@@ -15,4 +15,4 @@ class itemService {
     }
 }
 
-export default itemService;
+export default ItemService;

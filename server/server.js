@@ -22,7 +22,7 @@ exp.use(express.static('public'));
 exp.use(cors());
 exp.use(bodyParser.urlencoded({extended: true}));
 exp.use(bodyParser.json());
-exp.use('/items', router);
+exp.use('/admin', router);
 
 exp.listen(port, function() {
     console.log('Server is runing on port: ', port);
