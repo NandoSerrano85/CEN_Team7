@@ -17,6 +17,7 @@ mongo.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook')
         process.exit(1);
     });
 var router = require('./src/routes/DetailsRouter');
+var cart = require('./src/routes/CartRoutes');
 
 exp.use(express.static('public'));
 exp.use(cors());

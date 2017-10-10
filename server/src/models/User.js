@@ -1,5 +1,6 @@
 var mongo = require('mongoose');
 var Schema = mongo.Schema;
+vr bcrypt = require('bcrypt-nodejs');
 
 var User = new Schema({
     "credentials": {
@@ -49,5 +50,13 @@ var User = new Schema({
         }
     }]
 });
+
+User.methods.encryptPassword = function(password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
+};
+
+User.methods.validPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = mongo.model("User", User);

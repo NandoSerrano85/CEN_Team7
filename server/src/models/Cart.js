@@ -1,49 +1,41 @@
-var mongo = require('mongoose');
-var Schema = mongo.Schema;
+module.exports = function Cart(old){
+    this.products = old.products || {};
+    this.totalQty = old.totalQty || 0;
+    this.totalPrice = old.totalPrice || 0;
 
-var Cart = new Schema({
-    "timestamp": Date,
-    "total": Number,
-    "user": mongo.Schema.Types.ObjectId,
-    "price": {
-        "tax": Number,
-        "total": Number,
-        "subtotal": Number
-    },
-    "items": [mongo.Schema.Types.ObjectId],
-    "billing": {
-        "status": String, // Should enum cast into "paid", "unpaid", "pending", etc.; Suggestions?
-        "card": {
-            "number": String,
-            "name": String,
-            "cvv": String,
-            "expiration": Date
-        },
-        "address": {
-            "line_1": String,
-            "line_2": String,
-            "city": String,
-            "province": String,
-            "country": String
-        },
-        "email": String, // For receipt purposes
-        "phone": String // For receipt purposes
-    },
-    "fulfillment": {
-        "status": String, // Should enum cast into "fulfilled", "unfulfilled", "shipped", "pending_shipment", etc.; Suggestions?
-        "provider": String, // Ideally we would 'enum' validate this value into "USPS", "FedEx", "UPS", etc., however because we do not know all providers in a given regions/area...this is currently unfeasible without third-party help
-        "tracking": {
-            "url": String, // Should url validate
-            "number": String
-        },
-        "address": {
-            "line_1": String,
-            "line_2": String,
-            "city": String,
-            "province": String,
-            "country": Stringf
+    this.add = function(product, id) {
+        var inCart = this.products[id];
+        if(!inCart) {
+            inCart = this.products[id] = {product: product, qty:0, price:0};
         }
-    }
-});
+        inCart.qty++;
+        inCart.price = inCart.product.price * inCart.qty;
+        this.totalQty++;
+        this.totalPrice += inCart.product.price;
+    };
 
-module.exports = mongo.model("Cart", Cart);
+    this.reduceOne = function(id) {
+        this.products[id].qty--;
+        this.products[id].price -= this.products[id].product.price;
+        this.totalQty--;
+        this.totalPrice -= this.products[id].product.price;
+
+        if (this.products[id].qty <= 0) {
+            delete this.products[id];
+        }
+    };
+
+    this.removeproduct = function(id) {
+        this.totalQty -= this.products[id].qty;
+        this.totalPrice -= this.products[id].price;
+        delete this.products[id];
+    };
+
+    this.generateArray = function() {
+        var arr = [];
+        for (var id in this.products) {
+            arr.push(this.products[id]);
+        }
+        return arr;
+    };
+};

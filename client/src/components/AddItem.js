@@ -10,25 +10,20 @@ class AddItem extends Component {
                       pages: '',
                       price:'',
         };
-        this.addItem = new itemService();
+        this.addItem = new ItemService();
 
-        this.changeQuantity = this.changeQuantity.bind(this);
-        this.addToCart = this.addToCart.bind(this);
+        this.changeValue = this.changeValue.bind(this);
+        this.addToDB = this.addToDB.bind(this);
         }
 
         changeValue(event){
-            if(event.target.title){
-                this.setState({title: event.target.title});
-            }
-            if(event.target.isbn){
-                this.setState({isbn: event.target.isbn});
-            }
-            if(event.target.pages){
-                this.setState({pages: event.target.pages});
-            }
-            if(event.target.price){
-                this.setState({pages: event.target.price});
-            }
+            this.setState({
+                isbn: event.target.isbn,
+                pages: event.target.pages,
+                price: event.target.price,
+                title: event.target.title,
+            });
+
         }
         addToDB(event){
             event.preventDefault();

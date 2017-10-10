@@ -1,7 +1,7 @@
 var mongo = require('mongoose');
 var Schema = mongo.Schema;
 
-var Book = new Schema({
+var Product = new Schema({
     "title": String,
     "isbn": String,
     "author": {
@@ -52,4 +52,4 @@ var Book = new Schema({
     }]
 });
 
-module.exports = mongo.model('Book', Book);
+module.exports = mongo.model('Product', Product);
