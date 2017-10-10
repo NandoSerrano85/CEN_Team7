@@ -2,9 +2,9 @@ var express = require('express');
 var exp = express();
 var router = express.Router();
 
-var Book = ('../models/Book');
+var Book = require('../models/Book');
 
-router.route('/add/post').post(function (req, res) {
+router.route('/add-item/post').post(function (req, res) {
     var item = new Book(req.body);
         item.save()
         .then(item => {

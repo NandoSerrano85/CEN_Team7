@@ -36,7 +36,10 @@ This is the install guide that you would need to install all dependencies for wi
 3. ExpressJS - http://expressjs.com/en/starter/installing.html
 4. ReactJS - https://facebook.github.io/react/docs/installation.html
 
+---
+## Global dependencies
 
+nodemon: install using npm install -g nodemon
 ---
 ## Contributors
 
