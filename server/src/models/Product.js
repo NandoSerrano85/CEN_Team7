@@ -43,13 +43,42 @@ var Product = new Schema({
             max: 5
         },
         "message": String,
-        "timestamp": Date
+        "timestamp": { type: Date, default: Date.now }
     }],
     "comments": [{
         "user": mongo.Schema.Types.ObjectId,
         "message": String,
-        "timestamp": Date
+        "timestamp": { type: Date, default: Date.now }
     }]
 });
 
+/*
+* DEBUG ONLY
+* Initializes a Product model containing
+* garbage data.
+*/
+Product.methods.makeRandom = function(len){
+  this.title = randomString(len + 4);
+  this.isbn = randomString(len + 6);
+  this.author.name = randomString(len + 2);
+  this.author.bio = randomString(len + 3);
+  this.description = "This is a test document";
+  this.pages = (len % 1000) + 300;
+
+  for (var i = 0; i < len + 1; i++)
+    this.genres.push( randomString(len) );
+
+  this.comments = [{ message: "This is a test document" }];
+  this.ratings = [{ rating: (len % 5) + 1 }];
+  this.ratings.message = 'This is a test document';
+};
+
+var randomString = function(length) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for(var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
 module.exports = mongo.model('Product', Product);

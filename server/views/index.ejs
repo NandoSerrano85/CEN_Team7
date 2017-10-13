@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Details</title>
+</head>
+<body>
+<h1>  Books avaiable: </h1>
+
+  <ul class="books">
+  <% for(var i=0; i< books.length; i++) {%>
+    <li class="books">
+      <h3><%= books[i].title %></h3>
+
+     <span><%= "Author: " + books[i].author.name %></span> <br></br>
+     <span><%= "About the author: " + books[i].author.bio %></span> <br></br>
+     <span><%= "About the book: " + books[i].description %></span> <br></br>
+     <span><%= "Genres: " + books[i].genres %></span> <br></br>
+     <span><%= "Ratings: " + books[i].ratings %></span> <br></br>
+     <span><%= "Comments: " + books[i].comments %></span> 
+
+    </li>
+  <% } %>
+  </ul>
+
+</body>
+</html>

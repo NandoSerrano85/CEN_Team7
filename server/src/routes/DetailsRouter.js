@@ -1,8 +1,9 @@
 var express = require('express');
 var exp = express();
 var router = express.Router();
+var path = require('path')
 
-var Book = require('../models/Book');
+var Book = require('../models/Product.js');
 
 router.route('/add-item/post').post(function (req, res) {
     var item = new Book(req.body);
@@ -21,7 +22,9 @@ router.route('/').get(function (req, res) {
             console.log(err);
         }
         else {
-            res.json(items);
+            // Display avaiable books
+            exp.set('view engine', 'ejs');
+            res.render('../views/index.ejs', {books: items});
         }
     });
 });
@@ -56,6 +59,39 @@ router.route("/delete/:id").get(function (req, res){
             if(err) res.json(err);
             else res.json('Successfully removed');
         });
+});
+
+router.route("/delete_all").get(function (req, res){
+  Book.find(function (err, items)  {
+      if(err){
+          console.log(err);
+      }
+      else {
+        for (var i = 0; i < items.length; i++) {
+          items[i].remove();
+        }
+      }
+      res.redirect('/books');
+  });
+});
+
+/*
+Adds 5 test books to the database.
+*/
+router.route("/add-books").get(function (req, res){
+  var done = 0;
+  for (var i = 0; i < 5; i++) {
+    var temp = new Book();
+    temp.makeRandom((i % 5) + 4);
+    temp.save((err,temp) => {
+      if(err) return console.error(err);
+      console.log("adding book to db");
+      done += 1;
+    });
+  }
+  // if(done >= 5){
+    res.redirect('/books');
+//
 });
 
 module.exports = router;
