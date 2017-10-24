@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import AddItem from './components/AddItem';
 import IndexBook from './components/IndexBook';
+import BookDetails from './components/BookDetails';
 
 ReactDOM.render(
     <Router>
@@ -13,7 +14,7 @@ ReactDOM.render(
             <Route exact path='/' component={App} />
             <Route path='/admin/add-item' component={AddItem} />
             <Route path='/admin/items-books' component={IndexBook} />
-        
+            <Route path='/books' component={BookDetails} />
         </div>
     </Router>,
     document.getElementById('root')

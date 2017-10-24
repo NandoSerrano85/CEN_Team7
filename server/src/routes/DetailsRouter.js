@@ -17,14 +17,16 @@ router.route('/add-item/post').post(function (req, res) {
 });
 
 router.route('/').get(function (req, res) {
-    Book.find(function (err, items)  {
+    Book.find({}, function (err, items)  {
         if(err){
             console.log(err);
         }
         else {
+            // Send books to react
+            res.json(items)
             // Display avaiable books
-            exp.set('view engine', 'ejs');
-            res.render('../views/index.ejs', {books: items});
+            // exp.set('view engine', 'ejs');
+            // res.render('../views/index.ejs', {books: items});
         }
     });
 });
