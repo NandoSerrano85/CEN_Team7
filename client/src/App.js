@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import Background from './images/intelligent-books-to-read.jpg'
-
-
+import { Carousel } from 'react-responsive-carousel';
 
 class App extends Component {
   render() {
     return (
           <div className = "container">
+
               <div className = "row">
                   <div className ="col-md-12 text-center App-header">
                       Welcome to GeekBook
                   </div>
               </div>
+              
           </div>
 
       // <div className="App">
