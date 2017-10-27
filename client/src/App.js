@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Carousel } from 'react-responsive-carousel';
+import AppHeader from './components/Header';
+import Carrousel from './components/Carrousel';
+
 
 class App extends Component {
   render() {
     return (
-          <div className = "container">
-
-              <div className = "row">
-                  <div className ="col-md-12 text-center App-header">
-                      Welcome to GeekBook
-                  </div>
-              </div>
-              
+          <div className = "App-Site">
+            <div className = "App-Header">
+                <AppHeader />
+            </div>
+            <div className = "Main">
+              <Carrousel />
+            </div>
           </div>
+
 
       // <div className="App">
       //   <div className="App-header">

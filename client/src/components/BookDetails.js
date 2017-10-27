@@ -1,34 +1,61 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import '../App.css';
 import axios from 'axios';
 import BookService from './BookService'
 
-var books = new BookService();
-var booksList = books.getBooks();
-
 class BookDetails extends Component {
 
-  // axios.get('http://localhost:4100/books')
-  // .then(function(response){
-  //   var books = response.data;
-  // });
-  // AJAX call, gets all books from database
-  // getBooks() {
-  //   axios.get('http://localhost:4100/books')
-  //   .then(function(response){
-  //     this.books = response.data;
-  //     render() {
-  //       return (
-  //          <h1> {this.books} </h1>
-  //        );js
-  //     };
-  //   });
-  // };
+  constructor(props) {
+    super(props);
+    // Holds books in the DB
+    this.state = {
+      books: []
+    }
+  }
+
+  componentDidMount()
+  {
+      axios.get('http://localhost:4100/books')
+      .then((response) => {
+        //console.log(response.data);
+        this.setState({
+          books: response.data
+        });
+      });
+  }
+
+  displayBooks(data)
+  {
+    console.log("function called! Books: " + data.books);
+    const bookList = data.books.map((d) => <li key={d.isbn}>
+    {"Title: " + d.title}
+    </li>);
+
+    return (
+     <div>
+     {bookList }
+     </div>
+     );
+  }
 
   // Display book details
   render() {
     return (
-      <h1> jah man </h1>
+      <div className = "container">
+          <div className = "row">
+              <div className ="col-md-12 text-center App-header">
+                  Books on our shelves
+              </div>
+          </div>
+
+          <div className = "row">
+              <div className ="col-md-12 text-center books-list">
+                {this.displayBooks(this.state)}
+              </div>
+          </div>
+
+      </div>
     )
   };
 
