@@ -1,7 +1,5 @@
-
-@font-face {
-  font-family: "Stackyard Personal";
-  src: url("./fonts/webfontkit-20171024-105305/clasict1-webfont.woff");
+.App {
+  text-align: center;
 }
 
 .App-logo {
@@ -10,30 +8,21 @@
 }
 
 .App-header {
+  background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
-  font-family: "Stackyard Personal";
-  font-size: 60px;
 }
 
-.book-title {
-    text-align: center;
+.App-title {
+  font-size: 1.5em;
 }
 
-.books-list{
-  color: white;
-  font-size: 30px;
+.App-intro {
+  font-size: large;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
-
-.carrousel-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 210px;
 }
