@@ -5,4 +5,5 @@ body {
 
 .content {
   margin-top: 60px; /* to offset floating nav bar */
+  height: 100%;
 }

@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import BookService from "../../components/BookService";
 import Book from "./BookView";
+import OptionsBar from "./OptionsBar";
 import { API_URL } from "../../config";
 import ListPagination from "./pagination";
 import { Col, Clearfix } from "react-bootstrap";
+import "./books.css";
 
 const PAGE_SIZE = 8;
 
@@ -44,10 +46,15 @@ class Books extends Component {
     );
 
     return (
-      <div>
-        {books.map((book, index) => <Book key={index} book={book} />)}
+      <div className="books-wrapper">
+        <div className="OptionsBar">
+          <OptionsBar />
+        </div>
+        <div className="book-items">
+          {books.map((book, index) => <Book key={index} book={book} />)}
+        </div>
         <Clearfix />
-        <Col className="text-right" xs={12}>
+        <Col xs={12} className="text-right">
           <ListPagination
             activePage={activePage}
             items={Math.ceil(this.state.books.length / PAGE_SIZE)}

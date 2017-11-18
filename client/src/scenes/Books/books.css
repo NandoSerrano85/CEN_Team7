@@ -19,6 +19,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .book-price {
   margin-bottom: 0;
+}
+
+.books-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+}
+
+.book-items {
+  flex: 1;
+  overflow: auto;
 }
