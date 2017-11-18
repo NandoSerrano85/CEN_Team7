@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import BookService from "../../components/BookService";
+import BookListView from "./BookListView";
 import Book from "./BookView";
 import OptionsBar from "./OptionsBar";
-import { API_URL } from "../../config"; 
+import { API_URL } from "../../config";
 import ListPagination from "./pagination";
 import { Col, Clearfix } from "react-bootstrap";
 import "./books.css";
@@ -59,9 +60,13 @@ class Books extends Component {
     );
 
     // Place component in variable and load correct component when done
-    let booksDisplay = gridView
-      ? books.map((book, index) => <Book key={index} book={book} />)
-      : "Not Yet Implemented";
+    let booksDisplay = gridView ? (
+      books.map((book, index) => <Book key={index} book={book} />)
+    ) : (
+      <BookListView books={this.state.books} />
+    );
+
+    // Only show pagination if current view is grid view
     let paginationDispaly = gridView ? (
       <Col xs={12} className="text-right">
         <ListPagination

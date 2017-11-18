@@ -3,11 +3,9 @@ import "./books.css";
 import {
   Col,
   Panel,
-  Form,
   Glyphicon,
-  FormGroup,
-  FormControl,
-  ControlLabel,
+  DropdownButton,
+  MenuItem,
   Button
 } from "react-bootstrap";
 
@@ -21,24 +19,26 @@ function OptionBar(props) {
           <div className="views">
             <span className="list">
               <Button bsSize="xsmall" onClick={showList}>
-                <Glyphicon glyph="list" />
+                <Glyphicon glyph="list" /> List
               </Button>
             </span>
             <span className="grid">
               <Button bsSize="xsmall" onClick={showGrid}>
-                <Glyphicon glyph="th" />
+                <Glyphicon glyph="th" /> Grid
               </Button>
             </span>
           </div>
           <div className="search-form">
-            <Form inline>
-              <FormGroup controlId="formInlineSearch" className="search-bar">
-                <FormControl type="text" placeholder="Search Term" />
-              </FormGroup>
-              <Button type="submit" className="btn btn-default">
-                Search{" "}
-              </Button>
-            </Form>
+            <DropdownButton
+              bsStyle="default"
+              title="Browse Boooks By:"
+              id="dropdown-no-caret"
+            >
+              <MenuItem eventKey="1">Action</MenuItem>
+              <MenuItem eventKey="2">Another action</MenuItem>
+              <MenuItem eventKey="3">Something else here</MenuItem>
+              <MenuItem eventKey="4">Separated link</MenuItem>
+            </DropdownButton>
           </div>
         </div>
       </Panel>

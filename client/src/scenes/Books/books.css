@@ -37,7 +37,6 @@
   overflow: auto;
 }
 
-
 /* Options bar stuff */
 .search-bar {
   padding-right: 10px;
@@ -57,7 +56,7 @@
 .search-form {
   margin-left: auto;
 }
-.views {
-  position: relative;
-  left: 40%;
+
+.BookListView {
+  padding: 20px;
 }
