@@ -1,3 +1,4 @@
+/* Book view stuff */
 .ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -24,6 +25,7 @@
   margin-bottom: 0;
 }
 
+/* Books component stuff */
 .books-wrapper {
   display: flex;
   flex-direction: column;
@@ -33,4 +35,29 @@
 .book-items {
   flex: 1;
   overflow: auto;
+}
+
+
+/* Options bar stuff */
+.search-bar {
+  padding-right: 10px;
+}
+
+.option-panel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.views > span {
+  padding: 5px;
+}
+
+.search-form {
+  margin-left: auto;
+}
+.views {
+  position: relative;
+  left: 40%;
 }
