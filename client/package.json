@@ -7,6 +7,8 @@
     "material-ui": "^0.19.4",
     "npm": "^5.5.1",
     "react": "^16.0.0",
+    "react-bootstrap": "^0.31.5",
+    "react-bootstrap-table": "^4.1.4",
     "react-dom": "^16.0.0",
     "react-input-mask": "^1.0.7",
     "react-router-dom": "^4.2.2",
