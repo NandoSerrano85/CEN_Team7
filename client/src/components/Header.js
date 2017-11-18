@@ -3,7 +3,7 @@ import { Navbar, Nav, NavItem, Glyphicon } from "react-bootstrap";
 
 import "../App.css";
 
-class AppHeader extends React.Component {
+class AppHeader extends Component {
   render() {
     return (
       <Navbar fixedTop>
