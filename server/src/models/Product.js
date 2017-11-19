@@ -64,6 +64,9 @@ Product.methods.makeRandom = function(len){
   this.author.bio = randomString(len + 3);
   this.description = "This is a test document";
   this.pages = (len % 1000) + 300;
+  this.price = Math.floor(Math.random() * (120 - 5)) + 5;
+ 
+  this.publishing.release_date = randomDate(new Date(1998, 0, 1), new Date())
 
   for (var i = 0; i < len + 1; i++)
     this.genres.push( randomString(len) );
@@ -72,6 +75,10 @@ Product.methods.makeRandom = function(len){
   this.ratings = [{ rating: (len % 5) + 1 }];
   this.ratings.message = 'This is a test document';
 };
+
+var randomDate = function (start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
 
 var randomString = function(length) {
     var text = "";
