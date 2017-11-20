@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import '../App.css';
 import axios from 'axios';
 import BookService from './BookService'
+import ReactModal from 'react-modal';
 
 class BookDetails extends Component {
 
-  constructor(props) {
+  constructor(props)
+  {
     super(props);
     // Holds books in the DB
-    this.state = {
-      books: []1
-    }
+    this.state = { books: [] }
   }
 
   componentDidMount()
@@ -28,21 +28,32 @@ class BookDetails extends Component {
   displayBooks(data)
   {
     console.log("function called! Books: " + data.books);
-    const bookList = data.books.map((d) => <li key={d.isbn}>
-    {"Title: " + d.title}
-    </li>);
+    var imgSource = "http://via.placeholder.com/200x100";
+    const bookList = data.books.map((d) =>
+    <div key = {d.isbn} className="col-md-3 books-list">
+    <a href={"book-view/?isbn=" + d.isbn +"&img=" + imgSource}><img src="http://via.placeholder.com/200x100"/></a>
+    </div>);
 
     return (
-     <div>
-     {bookList }
+     <div className="row">
+     {bookList}
      </div>
      );
+  }
+
+  displayTest(data)
+  {
+    return(
+      <div className="row">
+      {console.log("data:" + data)}
+      </div>
+    );
   }
 
   // Display book details
   render() {
     return (
-      <div className = "container">
+      <div className = "container-fluid">
           <div className = "row">
               <div className ="col-md-12 text-center App-header">
                   Books on our shelves
@@ -50,9 +61,9 @@ class BookDetails extends Component {
           </div>
 
           <div className = "row">
-              <div className ="col-md-12 text-center books-list">
+                <div className ="col-md-12 text-center books-list">
                 {this.displayBooks(this.state)}
-              </div>
+                </div>
           </div>
 
       </div>
