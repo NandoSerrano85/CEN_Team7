@@ -22,8 +22,17 @@ router.route('/').get(function (req, res) {
             console.log(err);
         }
         else {
+<<<<<<< HEAD
             // Send books to react
             res.json(items)
+=======
+            // Save book isbns (for images)...
+            console.log("There are " + items.length + " books in the database");
+            for (var i = 0; i < items.length; i++) {
+              console.log(items[i].isbn);
+            }
+            res.json(items);
+>>>>>>> origin/dev_felipe
             // Display avaiable books
             // exp.set('view engine', 'ejs');
             // res.render('../views/index.ejs', {books: items});
@@ -63,6 +72,20 @@ router.route("/delete/:id").get(function (req, res){
         });
 });
 
+router.route("/findByISBN/:isbn").get(function (req, res){
+    book_isbn = req.params.isbn;
+    Book.find({isbn:book_isbn}, function (err, doc)  {
+        if(err){
+            console.log(err);
+        }
+        else {
+            res.json(doc);
+        }
+    });
+
+});
+
+
 router.route("/delete_all").get(function (req, res){
   Book.find(function (err, items)  {
       if(err){
@@ -82,7 +105,7 @@ Adds 5 test books to the database.
 */
 router.route("/add-books").get(function (req, res){
   var done = 0;
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 20; i++) {
     var temp = new Book();
     temp.makeRandom((i % 5) + 4);
     temp.save((err,temp) => {

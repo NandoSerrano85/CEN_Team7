@@ -11,7 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.4",
+<<<<<<< HEAD
     "express": "^4.16.2",
     "mongoose": "^4.12.2"
   }
+=======
+    "express": "^4.15.4",
+    "mongoose": "^4.11.12"
+   }
+>>>>>>> origin/dev_felipe
 }

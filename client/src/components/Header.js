@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import { Navbar, Nav, NavItem, Glyphicon } from "react-bootstrap";
 
 import "../App.css";
+=======
+import React, { Component } from 'react';
+import '../App.css';
+>>>>>>> origin/dev_felipe
 
 class AppHeader extends Component {
   render() {
     return (
+<<<<<<< HEAD
       <Navbar fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
@@ -28,6 +34,15 @@ class AppHeader extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+=======
+          <div className = "container-fluid">
+              <div className = "row">
+                  <div className ="col-md-12 text-center App-header">
+                      Welcome to GeekBook
+                  </div>
+              </div>
+          </div>
+>>>>>>> origin/dev_felipe
     );
   }
 }
