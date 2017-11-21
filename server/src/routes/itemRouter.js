@@ -101,7 +101,7 @@ userRouter.route('/updatePayment/:id').post(function (req, res) {
   });
 });
 
-//  Update for Payment Info
+//  Update for Address Info
 userRouter.route('/updateAddress/:id').post(function (req, res) {
   User.findById(req.params.id, function(err, user) {
     if (!user)

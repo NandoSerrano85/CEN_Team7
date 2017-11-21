@@ -64,7 +64,6 @@ export default class AddressField extends Component {
         street2: '',
         city: '',
         province: '',
-        zip: '',
         sameAddress: '',
       };
     this.newUserService = new UserService();
@@ -75,7 +74,6 @@ export default class AddressField extends Component {
     this.street2Change = this.street2Change.bind(this);
     this.cityChange = this.cityChange.bind(this);
     this.provinceChange = this.provinceChange.bind(this);
-    this.zipChange = this.zipChange.bind(this);
   }
 
   componentDidMount(){
@@ -87,7 +85,6 @@ export default class AddressField extends Component {
       try { this.setState({ street2: response.data.addresses[0].line_2}); } catch(err) {}
       try { this.setState({ city: response.data.addresses[0].city}); } catch(err) {}
       try { this.setState({ province: response.data.addresses[0].province}); } catch(err) {}
-      try { this.setState({ zip: response.data.addresses[0].zip}); } catch(err) {}
     })
     .catch(function (error) {
       console.log(error);
@@ -95,7 +92,7 @@ export default class AddressField extends Component {
   }
 
   handleSubmit(event) {
-    this.newUserService.updateAddress([this.state.country, this.state.street, this.state.street2, this.state.city, this.state.province, this.state.zip], this.state.userID);
+    this.newUserService.updateAddress([this.state.country, this.state.street, this.state.street2, this.state.city, this.state.province], this.state.userID);
   }
   countryChange(event) {
     this.setState({country: event.target.value});
@@ -111,9 +108,6 @@ export default class AddressField extends Component {
   }
   provinceChange(event) {
     this.setState({province: event.target.value});
-  }
-  zipChange(event) {
-    this.setState({zip: event.target.value});
   }
 
   createSelectItems() {
@@ -146,8 +140,6 @@ export default class AddressField extends Component {
                 City: <input type="text"  value={this.state.city} onChange={this.cityChange} />
                 <p/>
                 State/Province/Region: <input type="text"  value={this.state.province} onChange={this.provinceChange} />
-                <p/>
-                Zip: <InputMask mask="99999" maskChar="" value={this.state.zip} onChange={this.zipChange} />
                 <p/>
               </div>
             }

@@ -22,9 +22,18 @@ class UserService {
   }
 
   updatePayment(data, id){
+    //if Same as shipping is selected, set billing address empty to use shipping address
+    if(data[5])
+    {
+      data[6] = '';
+      data[7] = '';
+      data[8] = '';
+      data[9] = '';
+      data[10] = '';
+    }
     axios.post('http://localhost:4200/Users/updatePayment/'+id, {
       credit_cards: [{ name: data[0], number: data[1], cvv: data[2], expiration: (new Date(data[4], data[3], '01', 0, 0, 0, 0)), billing_address: {
-        same_Shipping: data[5], country: data[6], line_1: data[7], line_2: data[8], city: data[9], province: data[10], zip: data[11]
+        country: data[6], line_1: data[7], line_2: data[8], city: data[9], province: data[10]
       }, default: true}]
     })
     .then(res => console.log(res.body))
@@ -33,7 +42,7 @@ class UserService {
 
   updateAddress(data, id){
     axios.post('http://localhost:4200/Users/updateAddress/'+id, {
-      addresses: [{ country: data[0], line_1: data[1], line_2: data[2], city: data[3], province: data[4], zip: data[5], default: true}]
+      addresses: [{ country: data[0], line_1: data[1], line_2: data[2], city: data[3], province: data[4], default: true}]
     })
     .then(res => console.log(res.body))
     .catch(err => console.log(err))

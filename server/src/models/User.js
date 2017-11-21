@@ -34,7 +34,6 @@ var userSchema = new Schema({
     "city": String,
     "province": String,
     "country": String,
-    "zip": String,
     "default": Boolean // We could get crazier about addresses as well (i.e. billing, home, office, etc) - again, up to you guys; either way its a quick fix for the modeling
   }],
   "credit_cards": [{
@@ -47,11 +46,8 @@ var userSchema = new Schema({
       "line_2": String,
       "city": String,
       "province": String,
-      "country": String,
-      "zip": String,
-      "same_Shipping": Boolean
+      "country": String
     },
-    "default": Boolean
   }]
 }, {
   collection: 'User'
