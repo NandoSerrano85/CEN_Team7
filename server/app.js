@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var port = 4200;
+var port = 4100;
 var cors = require('cors');
 
 
@@ -20,6 +20,7 @@ mongoose.connect('mongodb://admin:admin@ds121225.mlab.com:21225/cen4010')
 
 // Required application specific custom router module
 var itemRouter = require('./src/routes/itemRouter');
+var detailsRouter = require('./src/routes/DetailsRouter');
 
 // Use middlewares to set view engine and post json data to the server
 app.use(express.static('public'));
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/Users', itemRouter);
+app.use('/books', detailsRouter);
 
 // Start the server
 app.listen(port, function(){

@@ -9,7 +9,7 @@ function Book(props) {
     <Col lg={3} md={4} sm={6}>
       <Panel className="book">
         <div className="book-img-wrapper">
-          <a href="#">
+          <a href={"book-view/?isbn=" + book.isbn}>
             <img
               alt={book.title || "No Title"}
               className="img-responsive product-img"
@@ -22,7 +22,7 @@ function Book(props) {
           {`By: ${book.author.name || "Unkown"}`}
         </h5>
         <h4 className="ellipsis" title={book.title}>
-          <a href="#">{book.title}</a>
+          <a href={"book-view/?isbn=" + book.isbn}>{book.title}</a>
         </h4>
 
         <div className="pull-right h4 book-price">{`${book.price || 0}$`}</div>

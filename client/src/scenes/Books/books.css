@@ -21,6 +21,12 @@
   transform: translate(-50%, -50%);
 }
 
+.book-header{
+  padding-top: 60px;
+  padding-bottom: 20px;
+  font-size: 280%;
+}
+
 .book-price {
   margin-bottom: 0;
 }
@@ -37,6 +43,18 @@
   overflow: auto;
 }
 
+.book-single{
+  font-size: 30px;
+  text-align: left;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="book-single"] {
+        padding-top: 30px;
+        text-align: center;
+    }
+}
 /* Options bar stuff */
 .search-bar {
   padding-right: 10px;
