@@ -71,13 +71,13 @@ class BookSingle extends Component {
             {this.displayTitle(this.state)}
             </div>
         </div>
-        <div className = "row">
+        <div className = "row details-content">
             <div className ="col-md-6 text-center">
                <button> <img id="myImg" onClick={ () => this.setState({ lBoxOpen: true }) } src= {this.state.imgSrc} width = "400" height = "550"/> </button>
             </div>
             {this.displayDeets(this.state)}
         </div>
-        <div className = "row img-container">
+        <div className = "row">
         {
           this.state.lBoxOpen &&
             <Lightbox
