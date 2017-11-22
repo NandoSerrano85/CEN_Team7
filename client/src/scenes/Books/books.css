@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.ReactModal__Overlay{
+  margin-top: 50px;
+}
+
 .book-img-wrapper {
   margin: -15px -15px 0;
   height: 0;

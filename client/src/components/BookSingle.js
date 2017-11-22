@@ -77,7 +77,7 @@ class BookSingle extends Component {
             </div>
             {this.displayDeets(this.state)}
         </div>
-        <div className = "row">
+        <div className = "row img-container">
         {
           this.state.lBoxOpen &&
             <Lightbox
