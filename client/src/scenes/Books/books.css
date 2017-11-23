@@ -5,9 +5,9 @@
   overflow: hidden;
 }
 
-/*.ReactModal__Overlay{
+.ReactModal__Overlay{
   margin-top: 50px;
-}*/
+}
 
 .book-img-wrapper {
   margin: -15px -15px 0;
@@ -17,6 +17,8 @@
   overflow: hidden;
   border-bottom: 1px solid e3e3e3;
 }
+
+
 
 .book-img {
   position: absolute;
@@ -54,14 +56,21 @@
 
 .book-single{
   font-size: 30px;
-  padding-top: 20px;
   text-align: left;
 }
+
+.comments{
+  font-size: 20px;
+  padding-top: 20px;
+  text-align: center;
+}
+
 
 @media only screen and (max-width: 1000px) {
     /* For mobile phones: */
     [class*="book-single"] {
         text-align: center;
+        padding-top: 30px;
     }
 }
 /* Options bar stuff */

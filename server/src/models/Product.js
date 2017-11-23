@@ -65,13 +65,13 @@ Product.methods.makeRandom = function(len){
   this.description = "This is a test document";
   this.pages = (len % 1000) + 300;
   this.price = Math.floor(Math.random() * (120 - 5)) + 5;
- 
+
   this.publishing.release_date = randomDate(new Date(1998, 0, 1), new Date())
 
-  for (var i = 0; i < len + 1; i++)
+  for (var i = 0; i < 4; i++)
     this.genres.push( randomString(len) );
 
-  this.comments = [{ message: "This is a test document" }];
+  this.comments = [{ message: "This is a test document" }, { message: "This is a test document" }, { message: "This is a test document" }];
   this.ratings = [{ rating: (len % 5) + 1 }];
   this.ratings.message = 'This is a test document';
 };

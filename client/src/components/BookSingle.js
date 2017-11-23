@@ -51,10 +51,37 @@ class BookSingle extends Component {
       <p>{"Bio: " + data.book[0].author.bio}</p> <br/>
       <p>{"Description: " + data.book[0].description}</p> <br/>
       <p>{"Genres: " + data.book[0].genres}</p> <br/>
-      <p>{"Date published: " + today.getFullYear() + ' / ' + (today.getMonth() + 1) + ' / ' + today.getDate()}</p><br/>
+      <p>{"Date published: " + data.book[0].publishing.release_date}</p><br/>
       <p>{"Publisher: GeekBooks"}</p> <br/>
       </div>
       );
+    }
+  }
+
+  displayComments(data)
+  {
+    if(data.book[0])
+    {
+      if(data.book[0].comments)
+      {
+        const commentList = data.book[0].comments.map((d) =>
+        <div key = {d.user} className="col-md-12">
+        <p> User: {d.user} Test-User</p> <br/>
+        <p> Message: {d.message} </p> <br/>
+        <p> Timestamp: {d.timestamp} </p>
+        <hr/>
+        </div>);
+
+        return (
+          <div className="row">
+          {commentList}
+          </div>
+          );
+      }
+      else
+      {
+        return ( <p> No comments! </p> );
+      }
     }
   }
 
@@ -68,12 +95,13 @@ class BookSingle extends Component {
       </div>
         <div className = "row">
             <div className = "col-md-12 text-center book-header">
-            {this.displayTitle(this.state)}
+            <b>{this.displayTitle(this.state)}</b>
             </div>
         </div>
+        <hr/>
         <div className = "row details-content">
             <div className ="col-md-6 text-center">
-               <button> <img id="myImg" onClick={ () => this.setState({ lBoxOpen: true }) } src= {this.state.imgSrc} width = "400" height = "550"/> </button>
+               <button> <img id="myImg" onClick={ () => this.setState({ lBoxOpen: true }) } src= {this.state.imgSrc} width = "450" height = "600"/> </button>
             </div>
             {this.displayDeets(this.state)}
         </div>
@@ -85,6 +113,15 @@ class BookSingle extends Component {
                 onCloseRequest={() => this.setState({ lBoxOpen: false })}
             />
           }
+        </div>
+        <div className = "row">
+            <div className = "col-md-12 text-center">
+            <h2><b>Comments</b></h2>
+            </div>
+        </div>
+        <hr/>
+        <div className = "comments">
+            {this.displayComments(this.state)}
         </div>
       </div>
     )
