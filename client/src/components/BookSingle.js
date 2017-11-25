@@ -47,7 +47,7 @@ class BookSingle extends Component {
     {
       return (
       <div className="col-md-6 book-single">
-      <p>{"Author: " + data.book[0].author.name}</p> <br/>
+      <a href={"/authorView/?author=" + data.book[0].author.name}> <p>{"Author: " + data.book[0].author.name}</p> </a> <br/>
       <p>{"Bio: " + data.book[0].author.bio}</p> <br/>
       <p>{"Description: " + data.book[0].description}</p> <br/>
       <p>{"Genres: " + data.book[0].genres}</p> <br/>

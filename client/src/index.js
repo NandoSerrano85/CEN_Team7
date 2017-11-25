@@ -7,6 +7,7 @@ import AddUser from './components/AddUser';
 import loginPage from './components/Login';
 import Profile from './components/ProfilePage';
 import BookSingle from './components/BookSingle';
+import AuthorView from './components/AuthorView';
 
 
 ReactDOM.render(
@@ -16,7 +17,8 @@ ReactDOM.render(
         <Route path='/add-user' component={AddUser} />
         <Route path='/login' component={loginPage} />
         <Route path='/profile/:id' component={Profile} />
-        <Route path='/book-view' component={BookSingle} />
+        <Route exact path='/book-view' component={BookSingle} />
+        <Route exact path='/authorView' component={AuthorView} />
       </div>
   </Router>,
   document.getElementById('root')
