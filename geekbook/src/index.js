@@ -10,6 +10,7 @@ import BookList from './components/books/BookListView';
 import Login from './components/profile/Login';
 import Signup from './components/profile/AddUser';
 import Profile from './components/profile/Profile';
+import Cart from './components/cart/Cart';
 
 ReactDOM.render(
     <Router>
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
             <Route path='/profile' component={Profile} />
+            <Route path='/cart' component={Cart}/>
 
         </div>
     </Router>,

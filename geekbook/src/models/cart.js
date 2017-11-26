@@ -1,12 +1,18 @@
 module.exports = function Cart(old){
-    this.products = old.products || {};
-    this.totalQty = old.totalQty || 0;
-    this.totalPrice = old.totalPrice || 0;
+    if(old == {}){
+        this.product = {};
+        this.totalQty =  0;
+        this.totalPrice = 0;
+    } else{
+        this.product = old.product;
+        this.totalQty = old.totalQty;
+        this.totalPrice = old.totalPrice;
+    }
 
     this.add = function(product, id) {
-        var inCart = this.products[id];
+        var inCart = this.product[id];
         if(!inCart) {
-            inCart = this.products[id] = {product: product, qty:0, price:0};
+            inCart = this.product[id] = {product: product, qty:0, price:0};
         }
         inCart.qty++;
         inCart.price = inCart.product.price * inCart.qty;
@@ -15,26 +21,26 @@ module.exports = function Cart(old){
     };
 
     this.reduceOne = function(id) {
-        this.products[id].qty--;
-        this.products[id].price -= this.products[id].product.price;
+        this.product[id].qty--;
+        this.product[id].price -= this.product[id].product.price;
         this.totalQty--;
-        this.totalPrice -= this.products[id].product.price;
+        this.totalPrice -= this.product[id].product.price;
 
-        if (this.products[id].qty <= 0) {
-            delete this.products[id];
+        if (this.product[id].qty <= 0) {
+            delete this.product[id];
         }
     };
 
     this.removeproduct = function(id) {
-        this.totalQty -= this.products[id].qty;
-        this.totalPrice -= this.products[id].price;
-        delete this.products[id];
+        this.totalQty -= this.product[id].qty;
+        this.totalPrice -= this.product[id].price;
+        delete this.product[id];
     };
 
     this.generateArray = function() {
         var arr = [];
-        for (var id in this.products) {
-            arr.push(this.products[id]);
+        for (var id in this.product) {
+            arr.push(this.product[id]);
         }
         return arr;
     };

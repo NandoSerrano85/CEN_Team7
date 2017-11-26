@@ -23,9 +23,8 @@ class Header extends Component {
                 <MenuItem href="/signup">Sign up</MenuItem>
                 <MenuItem href="/profile/">Account</MenuItem>
             </NavDropdown>
-            <NavItem eventKey={3} href="#">
+            <NavItem eventKey={3} href="/cart">
               <Glyphicon glyph="shopping-cart" />
-              {" Cart"}
             </NavItem>
           </Nav>
         </Navbar.Collapse>
