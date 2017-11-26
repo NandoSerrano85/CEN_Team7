@@ -52,6 +52,7 @@ class AuthorView extends Component {
         <div key = {d.isbn} className="col-md-12 book-author">
         <a href={"/book-view/?isbn=" + d.isbn }><img src={this.state.imgSrc}/></a>
         <p> Book title: {d.title} </p>
+        <hr/>
         </div>);
 
         return (
