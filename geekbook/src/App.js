@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AppHeader from "./components/Header";
 import Books from "./components/books/Books";
-import Cart from "./components/cart/Cart";
+
 import "./App.css";
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         </div>
         <div className="content">
           <Books className="Books" />
-          <Cart />
+
         </div>
       </div>
     );

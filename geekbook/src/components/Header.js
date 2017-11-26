@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Nav, NavItem, Glyphicon } from "react-bootstrap";
+import { Navbar, Nav, NavItem, Glyphicon, NavDropdown, MenuItem } from "react-bootstrap";
 
 import "../App.css";
 
@@ -18,13 +18,11 @@ class Header extends Component {
             <NavItem eventKey={1} href="/">
               Home
             </NavItem>
-            <NavItem eventKey={2} href="#">
-              <ul>Profile
-                <li><a href="/login">Login</a></li>
-                <li><a href="/signup">Sign up</a></li>
-                <li><a href="/profile/">Account</a></li>
-              </ul>
-            </NavItem>
+            <NavDropdown title="Profile" eventKey={2} href="#">
+                <MenuItem href="/login">Login</MenuItem>
+                <MenuItem href="/signup">Sign up</MenuItem>
+                <MenuItem href="/profile/">Account</MenuItem>
+            </NavDropdown>
             <NavItem eventKey={3} href="#">
               <Glyphicon glyph="shopping-cart" />
               {" Cart"}

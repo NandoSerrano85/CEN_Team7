@@ -17,7 +17,8 @@ class BookSingle extends Component {
     this.state = {
       book: [] ,
       imgSrc: "https://source.unsplash.com/6H9H-tYPUQQ/800x600",
-      lBoxOpen: false
+      lBoxOpen: false,
+      buttonLabel: "ADD TO CART",
     }
   }
 
@@ -25,7 +26,7 @@ class BookSingle extends Component {
   {
     var parsed = queryString.parse(this.props.location.search);
     console.log("Query string: " + parsed.isbn); // replace param with your own
-    var htmlReq = 'http://localhost:4100/books/findByISBN/' + parsed.isbn;
+    var htmlReq = 'http://localhost:4200/books/findByISBN/' + parsed.isbn;
       axios.get(htmlReq)
       .then((response) => {
         console.log("Book isbn: " + response.data[0]);
@@ -51,7 +52,6 @@ class BookSingle extends Component {
       <p>{"Bio: " + data.book[0].author.bio}</p> <br/>
       <p>{"Description: " + data.book[0].description}</p> <br/>
       <p>{"Genres: " + data.book[0].genres}</p> <br/>
-      <p>{"Date published: " + data.book[0].publishing.release_date}</p><br/>
       <p>{"Publisher: GeekBooks"}</p> <br/>
       </div>
       );
@@ -84,8 +84,26 @@ class BookSingle extends Component {
       }
     }
   }
+  addToCart(data){
+    this.setState({
+        selectedProduct: {
+            id: data.id,
+            name: data.title,
+            price: data.price,
+            quantity: data.in_stock-1,
+        }
+    })
+    this.setState({
+        buttonLabel: "✔ ADDED"
+    }, function(){
+        setTimeout(() => {
+            this.setState({ buttonLabel: "ADD TO CART" });
+        }, 5000);
+    });
+  }
 
   render() {
+    let data = this.state.book;
     return (
       <div className = "container">
       <div className = "row">
@@ -104,6 +122,7 @@ class BookSingle extends Component {
                <button> <img id="myImg" onClick={ () => this.setState({ lBoxOpen: true }) } src= {this.state.imgSrc} width = "450" height = "600"/> </button>
             </div>
             {this.displayDeets(this.state)}
+            <button type="button" onClick={this.addToCart.bind(this, data)}>{this.state.buttonLabel}</button>
         </div>
         <div className = "row">
         {

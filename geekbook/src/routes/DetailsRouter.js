@@ -3,7 +3,7 @@ var exp = express();
 var router = express.Router();
 var path = require('path')
 
-var Book = require('../models/Product.js');
+var Book = require('../models/product');
 
 router.route('/add-item/post').post(function (req, res) {
     var item = new Book(req.body);

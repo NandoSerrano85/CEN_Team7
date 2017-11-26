@@ -15,6 +15,14 @@ mongo.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook')
         console.error("Starting Error: ", err.stack);
         process.exit(1);
     });
-exp.listen(port, function(){
-    console.log('hello world');
-})
+var detailsRouter = require('./src/routes/DetailsRouter');
+
+exp.use(express.static('public'));
+exp.use(cors());
+exp.use(bodyParser.urlencoded({extended: true}));
+exp.use(bodyParser.json());
+exp.use('/books', detailsRouter);
+
+exp.listen(port, function() {
+    console.log('Server is runing on port: ', port);
+});
