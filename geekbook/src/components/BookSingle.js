@@ -86,24 +86,24 @@ class BookSingle extends Component {
     }
   }
   addToCart(data){
-    var parsed = queryString.parse(this.props.location.search);
-    console.log("Query string: " + parsed.id);
-    var htmlReq = 'http://localhost:4200/books/add-to-cart/' + parsed.id;
+    // var parsed = queryString.parse(this.props.location.search);
+    // console.log("Query string: " + parsed.isbn);
+    var htmlReq = 'http://localhost:4200/cart/add-to-cart/' + data[0]._id;
     axios.get(htmlReq)
     .then((response) => {
-        
-    });
-    this.setState({
-        buttonLabel: "✔ ADDED"
-    }, function(){
-        setTimeout(() => {
-            this.setState({ buttonLabel: "ADD TO CART" });
-        }, 5000);
+        console.log("Added item to cart" + response.data[0]);
+        this.setState({
+            buttonLabel: "✔ ADDED"
+        }, function(){
+            setTimeout(() => {
+                this.setState({ buttonLabel: "ADD TO CART" });
+            }, 5000);
+        });
     });
   }
 
   render() {
-    let data = this.state.book;
+      let data = this.state.book;
     return (
       <div className = "container">
       <div className = "row">

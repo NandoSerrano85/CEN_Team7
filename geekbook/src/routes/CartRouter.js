@@ -1,44 +1,48 @@
 var express = require('express');
-var exp = express();
 var router = express.Router();
 var path = require('path')
 
 var Book = require('../models/product');
 var Cart = require('../models/cart');
 
-router.get('/add-to-cart/:id', function(req, res, next) {
-    var productId = req.params.id;
+
+
+router.route('/add-to-cart/:id').get(function(req, res, next) {
+    var id = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    Book.findById(productId, function(err, product) {
+    Book.findById(id, function(err, product) {
         if (err) {
           return res.redirect('/');
         }
-        cart.add(product, product.id);
+        console.log(product)
+
+        cart.add(product, id);
         req.session.cart = cart;
         res.redirect('/');
     });
 });
 
-router.get('/reduce/:id', function(req, res, next) {
-    var productId = req.params.id;
+router.route('/reduce/:id').get(function(req, res, next) {
+    var id = req.params.id;
+    console.log(id);
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    cart.reduceByOne(productId);
+    cart.reduceOne(id);
     req.session.cart = cart;
     res.redirect('/shopping-cart');
 });
 
-router.get('/remove/:id', function(req, res, next) {
-    var productId = req.params.id;
+router.route('/remove/:id').get(function(req, res, next) {
+    var id = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    cart.removeItem(productId);
+    cart.remove(id);
     req.session.cart = cart;
     res.redirect('/shopping-cart');
 });
 
-router.get('/shopping-cart', function(req, res, next) {
+router.route('/shopping-cart').get(function(req, res, next) {
     if (!req.session) {
         return res.json({
           books: null
@@ -51,20 +55,20 @@ router.get('/shopping-cart', function(req, res, next) {
     });
 });
 
-router.get('/checkout',function(req, res, next) {
+router.route('/checkout').get(function(req, res, next) {
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
     var cart = new Cart(req.session.cart);
     var errMsg = req.flash('error')[0];
-    res.render('shop/checkout', {
+    res.render('/checkout', {
         total: cart.totalPrice,
         errMsg: errMsg,
         noError: !errMsg
     });
 });
 
-router.post('/checkout', function(req, res, next) {
+router.route('/checkout').get(function(req, res, next) {
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
@@ -96,3 +100,5 @@ router.post('/checkout', function(req, res, next) {
     //     });
     // });
 });
+
+module.exports = router;

@@ -13,7 +13,7 @@ class Cart extends Component{
 
     componentDidMount()
     {
-        axios.get('http://localhost:4200/books/shopping-cart')
+        axios.get('http://localhost:4200/cart/shopping-cart')
         .then((response) => {
           //console.log(response.data);
           this.setState({

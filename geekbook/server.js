@@ -1,14 +1,15 @@
 var express = require('express');
 var exp = express();
 var session = require('express-session');
-var mongo = require('mongoose');
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var port = 4200;
 var path = require('path')
 var cors = require('cors');
+var MongoStore = require('connect-mongo')(session);
 
-mongo.Promise = require('bluebird');
-mongo.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook')
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook')
     .then(() => {
         console.log("Start");
     })
@@ -19,20 +20,23 @@ mongo.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook')
 var detailsRouter = require('./src/routes/DetailsRouter');
 var cartRouter = require('./src/routes/CartRouter');
 
-// exp.set('views', path.join(__dirname, 'views'));
-// exp.set('view engine', '.hbs');
-
 exp.use(express.static('public'));
 exp.use(cors());
 exp.use(bodyParser.urlencoded({extended: true}));
 exp.use(bodyParser.json());
 exp.use(session({
-    secret: 'secret',
+    secret: 'mysupersecret',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 exp.use('/books', detailsRouter);
-exp.use('/', cartRouter );
+exp.use('/cart', cartRouter);
+exp.use(function(req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
+
 exp.listen(port, function() {
     console.log('Server is runing on port: ', port);
 });

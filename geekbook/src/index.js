@@ -21,7 +21,6 @@ ReactDOM.render(
             <Route path='/signup' component={Signup} />
             <Route path='/profile' component={Profile} />
             <Route path='/cart' component={Cart}/>
-
         </div>
     </Router>,
     document.getElementById('root')
