@@ -69,6 +69,7 @@ export default class CreditCardField extends Component {
         street2: '',
         city: '',
         province: '',
+        zip: '',
       };
     this.newUserService = new UserService();
 
@@ -90,6 +91,10 @@ export default class CreditCardField extends Component {
   componentDidMount(){
     axios.get('http://localhost:4200/Users/edit/' + this.props.userID)
     .then(response => {
+      var _street = '';
+      var _street2 = '';
+      var _city = '';
+      var _province = '';
       this.setState({ userID: this.props.userID});
       try { this.setState({ cardName: response.data.credit_cards[0].name}); } catch(err) {}
       try { this.setState({ cardNumber: response.data.credit_cards[0].number}); } catch(err) {}
@@ -100,22 +105,53 @@ export default class CreditCardField extends Component {
       try {
         this.setState({ cardYear: (new Date(response.data.credit_cards[0].expiration)).getFullYear()});
       } catch(err) {console.log(err)}
-      try { this.setState({ duplicateAddress: response.data.credit_cards[0].billing_address.same_Shipping}); } catch(err) {}
       try { this.setState({ country: response.data.credit_cards[0].billing_address.country}); } catch(err) {}
-      try { this.setState({ street: response.data.credit_cards[0].billing_address.line_1}); } catch(err) {}
-      try { this.setState({ street2: response.data.credit_cards[0].billing_address.line_2}); } catch(err) {}
-      try { this.setState({ city: response.data.credit_cards[0].billing_address.city}); } catch(err) {}
-      try { this.setState({ province: response.data.credit_cards[0].billing_address.province}); } catch(err) {}
+      try {
+        this.setState({ street: response.data.credit_cards[0].billing_address.line_1});
+        _street = response.data.credit_cards[0].billing_address.line_1;
+      } catch(err) {}
+      try {
+        this.setState({ street2: response.data.credit_cards[0].billing_address.line_2});
+        _street2 = response.data.credit_cards[0].billing_address.line_2;
+      } catch(err) {}
+      try {
+        this.setState({ city: response.data.credit_cards[0].billing_address.city});
+        _city = response.data.credit_cards[0].billing_address.city;
+      } catch(err) {}
+      try {
+        this.setState({ province: response.data.credit_cards[0].billing_address.province});
+        _province = response.data.credit_cards[0].billing_address.province;
+      } catch(err) {}
       try { this.setState({ zip: response.data.credit_cards[0].billing_address.zip}); } catch(err) {}
+      if (_street == '' && _street2 == ''
+           && _city == '' && _province == '')
+      {
+        this.setState({ duplicateAddress: true });
+      }
     })
     .catch(function (error) {
       console.log(error);
     })
+
   }
 
   handleSubmit(event) {
-    this.newUserService.updatePayment([this.state.cardName, this.state.cardNumber, this.state.cardCVV, this.state.cardMonth, this.state.cardYear, this.state.duplicateAddress, this.state.country, this.state.street, this.state.street2, this.state.city, this.state.province, this.state.zip], this.state.userID);
+    var dateValid = false;
+    var expDate = new Date(this.state.cardYear, this.state.cardMonth, '01', 0, 0, 0, 0);
+
+    if (expDate.getMonth() >= (new Date()).getMonth() && expDate.getFullYear() >= (new Date()).getFullYear())
+      { dateValid = true; }
+
+    if (dateValid)
+    {
+      this.newUserService.updatePayment([this.state.cardName, this.state.cardNumber, this.state.cardCVV, this.state.cardMonth, this.state.cardYear, this.state.duplicateAddress, this.state.country, this.state.street, this.state.street2, this.state.city, this.state.province, this.state.zip], this.state.userID);
+    }
+    else
+    {
+      alert('Card is already expired.');
+    }
   }
+
   cardNameChange(event) {
     this.setState({cardName: event.target.value});
   }
@@ -132,7 +168,7 @@ export default class CreditCardField extends Component {
     this.setState({cardYear: event.target.value});
   }
   duplicateAddressChange(event) {
-    this.setState({duplicateAddress: !event.target.value});
+    this.setState({duplicateAddress: !this.state.duplicateAddress});
   }
   countryChange(event) {
     this.setState({country: event.target.value});

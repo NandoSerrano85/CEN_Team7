@@ -11,6 +11,7 @@ import Login from './components/profile/Login';
 import Signup from './components/profile/AddUser';
 import Profile from './components/profile/Profile';
 import Cart from './components/cart/Cart';
+import AuthorView from './components/books/AuthorView';
 
 ReactDOM.render(
     <Router>
@@ -19,8 +20,9 @@ ReactDOM.render(
             <Route path='/book-view' component={BookSingle} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/profile/:id' component={Profile} />
             <Route path='/cart' component={Cart}/>
+            <Route path='/author-view' component={AuthorView}/>
         </div>
     </Router>,
     document.getElementById('root')

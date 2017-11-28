@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import UserService from './UserService';
 import axios from 'axios';
+import AppHeader from "../Header";
+import '../../App.css';
 
 class ProfilePage extends Component {
 
@@ -25,6 +27,7 @@ class ProfilePage extends Component {
       this.emailChange = this.emailChange.bind(this);
       this.nicknameChange = this.nicknameChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.login = this.login.bind(this);
     }
 
   usernameChange(event) {
@@ -108,11 +111,19 @@ class ProfilePage extends Component {
       this.props.history.push('../login');
     }
   }
+  login(event) {
+      this.props.history.push('../login');
+  }
 
   render()
   {
     return (
-      <div className="App">
+      <div className="login">
+        <div className = "row">
+          <div className="App">
+            <AppHeader />
+          </div>
+        </div>
         <form onSubmit={this.handleSubmit}>
         Username: <input type="text" value={this.state.username} onChange={this.usernameChange} required />
             {
@@ -127,7 +138,7 @@ class ProfilePage extends Component {
               'This email is already associated with an account here. Please log in.'
             } <p/>
         Public Nickname: <input type="text" value={this.state.nickname} onChange={this.nicknameChange} required /> <p/>
-        <input type="submit" value="Cancel" />
+        <input type="submit" value="Already have an account?" onClick={this.login}/>
         <input type="submit" value="Create Account" />
         </form>
       </div>

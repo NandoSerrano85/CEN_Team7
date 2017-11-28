@@ -6,6 +6,8 @@ import CreditCardField from './CreditCardField';
 import axios from 'axios';
 import UserService from './UserService';
 import InputMask from 'react-input-mask';
+import AppHeader from "../Header";
+import '../../App.css';
 
 class ProfilePage extends Component {
 
@@ -29,6 +31,7 @@ class ProfilePage extends Component {
     this.fNameChange = this.fNameChange.bind(this);
     this.emailChange = this.emailChange.bind(this);
     this.phoneChange = this.phoneChange.bind(this);
+    this.logout = this.logout.bind(this);
     this.nicknameChange = this.nicknameChange.bind(this);
   }
 
@@ -73,10 +76,42 @@ class ProfilePage extends Component {
     this.setState({nickname: event.target.value});
   }
 
+  getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+  }
+
+  setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  logout(event) {
+    this.setCookie('expires', 'Thu, 01 Jan 1970 00:00:00 UTC', -10);
+    this.props.history.push('../login');
+  }
+
   render()
   {
     return (
-      <div className="App">
+      <div className="login">
+        <div className = "row">
+          <div className="App">
+            <AppHeader />
+          </div>
+        </div>
           <Tabs>
             <TabList>
               <Tab>Login Info</Tab>
@@ -88,6 +123,7 @@ class ProfilePage extends Component {
               <form onSubmit={this.handleLoginChange}>
                 Username: <input type="text" disabled="true" value={this.state.username} /> <p/>
                 Password: <input type="password" value={this.state.password} onChange={this.passwordChange} /> <p/>
+                <input type="button" value="Log Out" onClick={this.logout}/>
                 <input type="submit" value="Submit Changes" />
               </form>
             </TabPanel>

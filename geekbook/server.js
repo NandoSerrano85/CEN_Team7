@@ -1,4 +1,5 @@
 var express = require('express');
+var cookieParser = require('cookie-parser');
 var exp = express();
 var session = require('express-session');
 var mongoose = require('mongoose');
@@ -19,7 +20,7 @@ mongoose.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook'
     });
 var detailsRouter = require('./src/routes/DetailsRouter');
 var cartRouter = require('./src/routes/CartRouter');
-
+exp.use(cookieParser());
 exp.use(express.static('public'));
 exp.use(cors());
 exp.use(bodyParser.urlencoded({extended: true}));
@@ -33,6 +34,7 @@ exp.use(session({
 exp.use('/books', detailsRouter);
 exp.use('/cart', cartRouter);
 exp.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
     res.locals.session = req.session;
     next();
 });

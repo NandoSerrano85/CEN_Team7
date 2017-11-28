@@ -35,3 +35,12 @@ body {
 .dropbtn:hover .dropbtn-content {
     display: block;
 }
+
+.content {
+  margin-top: 60px; /* to offset floating nav bar */
+  height: 100%;
+}
+
+.login {
+	margin-top: 75px;
+}

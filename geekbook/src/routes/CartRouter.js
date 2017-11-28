@@ -13,19 +13,16 @@ router.route('/add-to-cart/:id').get(function(req, res, next) {
 
     Book.findById(id, function(err, product) {
         if (err) {
-          return res.redirect('/');
+          res.redirect('localhost:3000/');
         }
-        console.log(product)
-
         cart.add(product, id);
         req.session.cart = cart;
-        res.redirect('/');
+        res.redirect('localhost:3000/');
     });
 });
 
 router.route('/reduce/:id').get(function(req, res, next) {
     var id = req.params.id;
-    console.log(id);
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
     cart.reduceOne(id);
@@ -48,6 +45,8 @@ router.route('/shopping-cart').get(function(req, res, next) {
           books: null
         });
     }
+    console.log(req.session)
+    console.log(next)
     var cart = new Cart(req.session.cart);
     res.json({
         books: cart.generateArray(),

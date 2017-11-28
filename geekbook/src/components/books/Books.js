@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import BookService from "../../components/BookService";
+import BookService from "../BookService";
 import BookListView from "./BookListView";
 import Book from "./BookView";
 import OptionsBar from "./OptionBar";

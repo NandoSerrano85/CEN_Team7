@@ -86,8 +86,6 @@ class BookSingle extends Component {
     }
   }
   addToCart(data){
-    // var parsed = queryString.parse(this.props.location.search);
-    // console.log("Query string: " + parsed.isbn);
     var htmlReq = 'http://localhost:4200/cart/add-to-cart/' + data[0]._id;
     axios.get(htmlReq)
     .then((response) => {
