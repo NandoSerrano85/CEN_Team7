@@ -48,7 +48,7 @@ class ProfilePage extends Component {
 
   componentDidMount() {
     this.setState({usersObject:''});
-    axios.get('http://localhost:4200/Users')
+    axios.get('http://localhost:4200/user')
       .then(response => {
         this.setState({ usersObject: response.data });
       })

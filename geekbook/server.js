@@ -21,6 +21,7 @@ mongoose.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook'
     });
 var detailsRouter = require('./src/routes/DetailsRouter');
 var cartRouter = require('./src/routes/CartRouter');
+var userRouter = require('./src/routes/UserRouter');
 exp.use(validator());
 exp.use(cookieParser());
 exp.use(express.static('public'));
@@ -36,6 +37,7 @@ exp.use(session({
 }));
 exp.use('/books', detailsRouter);
 exp.use('/cart', cartRouter);
+exp.use('/user', userRouter);
 exp.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.locals.session = req.session;

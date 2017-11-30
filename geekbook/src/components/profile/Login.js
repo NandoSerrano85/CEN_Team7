@@ -42,7 +42,7 @@ class ProfilePage extends Component {
     }
     catch(err) {};
     this.setState({usersObject:''});
-    axios.get('http://localhost:4100/Users')
+    axios.get('http://localhost:4200/user')
       .then(response => {
         this.setState({ usersObject: response.data });
       })
@@ -84,7 +84,7 @@ class ProfilePage extends Component {
   }
 
   createAcct(event) {
-      this.props.history.push('../add-user');
+      this.props.history.push('../signup');
   }
 
   getCookie(cname) {

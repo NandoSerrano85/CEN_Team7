@@ -36,7 +36,7 @@ class ProfilePage extends Component {
   }
 
   componentDidMount(){
-    axios.get('http://localhost:4200/Users/edit/'+this.props.match.params.id)
+    axios.get('http://localhost:4200/user/edit/'+this.props.match.params.id)
     .then(response => {
       this.setState({ userID: this.props.match.params.id});
       this.setState({ username: response.data.credentials.local.username});

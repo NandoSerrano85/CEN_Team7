@@ -1,6 +1,5 @@
 var mongo = require('mongoose');
 var Schema = mongo.Schema;
-var bcrypt = require('bcrypt-nodejs');
 
 var User = new Schema({
     "credentials": {
@@ -13,9 +12,9 @@ var User = new Schema({
         "twitter": mongo.Schema.Types.Mixed, // We could - and probably should - validate further but if we just use 'passport-twitter', we should be good.
         "instagram": mongo.Schema.Types.Mixed // We could - and probably should - validate further but if we just use 'passport-instagram', we should be good.
     },
-    "name": String // We could get a little bit more crazy with the name; creating virtuals for full name and tracking first, middle, and last - up to you guys...tbh, that seems unnecessary for a simple school project.
+    "name": String, // We could get a little bit more crazy with the name; creating virtuals for full name and tracking first, middle, and last - up to you guys...tbh, that seems unnecessary for a simple school project.
     "nickname": String,
-    "purchases": [mongo.Schema.Types.ObjectId] // A list of Purchase Objects?
+    "purchases": [mongo.Schema.Types.ObjectId], // A list of Purchase Objects?
     "cart": [mongo.Schema.Types.ObjectId], // A list of Book Objects?
     "emails": [{
         "email": String,
@@ -24,7 +23,7 @@ var User = new Schema({
     "phones": [{
         "phone": String,
         "default": Boolean
-    }]
+    }],
     "settings": {
         "anonymous": Boolean // We could add more settings...
     },
@@ -32,8 +31,9 @@ var User = new Schema({
         "line_1": String,
         "line_2": String,
         "city": String,
-        "province" String,
+        "province": String,
         "country": String,
+        "zip": String,
         "default": Boolean // We could get crazier about addresses as well (i.e. billing, home, office, etc) - again, up to you guys; either way its a quick fix for the modeling
     }],
     "credit_cards": [{
@@ -46,17 +46,13 @@ var User = new Schema({
             "line_2": String,
             "city": String,
             "province": String,
-            "country": String
+            "country": String,
+            "zip": String,
+            "same_Shipping": Boolean,
         }
     }]
 });
 
-User.methods.encryptPassword = function(password){
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
-};
 
-User.methods.validPassword = function(password){
-    return bcrypt.compareSync(password, this.password);
-};
 
 module.exports = mongo.model("User", User);

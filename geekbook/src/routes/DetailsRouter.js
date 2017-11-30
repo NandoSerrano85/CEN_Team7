@@ -23,9 +23,6 @@ router.route('/').get(function (req, res) {
         else {
             // Save book isbns (for images)...
             console.log("There are " + items.length + " books in the database");
-            for (var i = 0; i < items.length; i++) {
-              console.log(items[i].isbn);
-            }
             res.json(items);
             // Display avaiable books
             // exp.set('view engine', 'ejs');

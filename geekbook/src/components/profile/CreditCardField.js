@@ -89,7 +89,7 @@ export default class CreditCardField extends Component {
   }
 
   componentDidMount(){
-    axios.get('http://localhost:4200/Users/edit/' + this.props.userID)
+    axios.get('http://localhost:4200/user/edit/' + this.props.userID)
     .then(response => {
       var _street = '';
       var _street2 = '';
@@ -138,9 +138,16 @@ export default class CreditCardField extends Component {
   handleSubmit(event) {
     var dateValid = false;
     var expDate = new Date(this.state.cardYear, this.state.cardMonth, '01', 0, 0, 0, 0);
-
-    if (expDate.getMonth() >= (new Date()).getMonth() && expDate.getFullYear() >= (new Date()).getFullYear())
+    console.log(expDate.getMonth());
+    console.log((new Date().getMonth()));
+    console.log(expDate.getFullYear());
+    console.log((new Date().getFullYear()));
+    if (expDate.getMonth() >= (new Date().getMonth()))
       { dateValid = true; }
+    if(expDate.getFullYear() >= (new Date().getFullYear()))
+      {dateValid = true;}
+    else
+      { dateValid = false; }
 
     if (dateValid)
     {

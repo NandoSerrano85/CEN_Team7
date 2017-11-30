@@ -79,7 +79,7 @@ export default class AddressField extends Component {
   }
 
   componentDidMount(){
-    axios.get('http://localhost:4200/Users/edit/' + this.props.userID)
+    axios.get('http://localhost:4200/user/edit/' + this.props.userID)
     .then(response => {
       this.setState({ userID: this.props.userID});
       try { this.setState({ country: response.data.addresses[0].country}); } catch(err) {}
