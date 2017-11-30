@@ -72,6 +72,10 @@
         text-align: center;
         padding-top: 30px;
     }
+    [class*="MyButton"] {
+        text-align: center;
+        padding-bottom: 20px;
+    }
 }
 /* Options bar stuff */
 .search-bar {

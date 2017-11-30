@@ -119,7 +119,9 @@ class BookSingle extends Component {
                <button> <img id="myImg" onClick={ () => this.setState({ lBoxOpen: true }) } src= {this.state.imgSrc} width = "450" height = "600"/> </button>
             </div>
             {this.displayDeets(this.state)}
+            <div className="MyButton">
             <button type="button" onClick={this.addToCart.bind(this, data)}>{this.state.buttonLabel}</button>
+            </div>
         </div>
         <div className = "row">
         {
