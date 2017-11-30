@@ -20,6 +20,7 @@ ReactDOM.render(
             <Route path='/book-view' component={BookSingle} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
+            <Route path='/add-user' component={Signup} />
             <Route path='/profile/:id' component={Profile} />
             <Route path='/cart' component={Cart}/>
             <Route path='/author-view' component={AuthorView}/>
