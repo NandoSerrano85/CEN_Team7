@@ -5,7 +5,6 @@ import AppHeader from "./Header";
 import "./books/books.css";
 import Lightbox from 'react-image-lightbox';
 import axios from 'axios';
-import Cart from '../models/cart';
 const queryString = require('query-string');
 const today = new Date();
 
@@ -89,7 +88,7 @@ class BookSingle extends Component {
     var htmlReq = 'http://localhost:4200/cart/add-to-cart/' + data[0]._id;
     axios.get(htmlReq)
     .then((response) => {
-        console.log("Added item to cart" + response.data[0]);
+        console.log("Added item to cart " + response.data);
         this.setState({
             buttonLabel: "✔ ADDED"
         }, function(){
