@@ -79,6 +79,19 @@ router.route("/findByISBN/:isbn").get(function (req, res){
 
 });
 
+router.route("/findByAuthor/:author").get(function (req, res){
+    book_author = req.params.author;
+    Book.find({'author.name':book_author}, function (err, doc)  {
+        if(err){
+            console.log(err);
+        }
+        else {
+            res.json(doc);
+        }
+    });
+
+});
+
 
 router.route("/delete_all").get(function (req, res){
   Book.find(function (err, items)  {
