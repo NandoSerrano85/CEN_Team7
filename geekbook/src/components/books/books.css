@@ -1,0 +1,103 @@
+/* Book view stuff */
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ReactModal__Overlay{
+  margin-top: 50px;
+}
+
+.book-img-wrapper {
+  margin: -15px -15px 0;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid e3e3e3;
+}
+
+
+
+.book-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.book-header{
+  padding-top: 80px;
+  padding-bottom: 20px;
+  font-size: 280%;
+}
+
+.book-price {
+  margin-bottom: 0;
+}
+
+/* Books component stuff */
+.books-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+}
+
+.details-content
+{
+  padding-top: 20px;
+}
+
+.book-items {
+  flex: 1;
+  overflow: auto;
+}
+
+.book-single{
+  font-size: 30px;
+  text-align: left;
+}
+
+.comments{
+  font-size: 20px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    /* For mobile phones: */
+    [class*="book-single"] {
+        text-align: center;
+        padding-top: 30px;
+    }
+}
+/* Options bar stuff */
+.search-bar {
+  padding-right: 10px;
+}
+
+.option-panel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.views > span {
+  padding: 5px;
+}
+
+.search-form {
+  text-align: center;
+  margin-left: auto;
+}
+
+.BookListView {
+  padding: 20px;
+}
+
+.browse {
+  padding-left: 5px;
+}
