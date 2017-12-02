@@ -1,14 +1,15 @@
 var express = require('express');
-var cookieParser = require('cookie-parser');
-var exp = express();
 var session = require('express-session');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var port = 4200;
 var path = require('path')
 var cors = require('cors');
+var flash = require('connect-flash');
+var passport = require('passport');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
+var exp = express();
 
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook')
@@ -22,8 +23,9 @@ mongoose.connect('mongodb://geekbook:G33kB00k!@ds141434.mlab.com:41434/geekbook'
 var detailsRouter = require('./src/routes/DetailsRouter');
 var cartRouter = require('./src/routes/CartRouter');
 var userRouter = require('./src/routes/UserRouter');
+
+// exp.use(flash());
 exp.use(validator());
-exp.use(cookieParser());
 exp.use(express.static('public'));
 exp.use(cors());
 exp.use(bodyParser.urlencoded({extended: true}));
@@ -32,16 +34,20 @@ exp.use(session({
     secret: 'mysupersecret',
     resave: false,
     saveUninitialized: false,
-    // store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 180 * 60 * 10000 }
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: {maxAge: 10000000 }
 }));
 exp.use('/books', detailsRouter);
 exp.use('/cart', cartRouter);
 exp.use('/user', userRouter);
+exp.use(passport.initialize());
+exp.use(passport.session());
 exp.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    // res.header("Access-Control-Allow-Origin", "http://localhost:4200/cart/shopping-cart");
+    // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    // res.header("Access-Control-Allow-Credentials", true);
     res.locals.session = req.session;
-    next();
+    return next();
 });
 
 exp.listen(port, function() {

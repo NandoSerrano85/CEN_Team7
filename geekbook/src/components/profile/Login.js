@@ -42,8 +42,9 @@ class ProfilePage extends Component {
     }
     catch(err) {};
     this.setState({usersObject:''});
-    axios.get('http://localhost:4200/user')
+    axios.get('http://localhost:4200/user/')
       .then(response => {
+          console.log(response)
         this.setState({ usersObject: response.data });
       })
       .catch(function (error) {

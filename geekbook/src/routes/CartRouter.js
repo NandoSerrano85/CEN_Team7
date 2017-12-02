@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path')
-
+var path = require('path');
+var cors = require('cors');
 var Book = require('../models/product');
 var Cart = require('../models/cart');
 
-router.route('/add-to-cart/:id').get(function(req, res) {
+router.get('/add-to-cart/:id', cors({origin: 'http://localhost:3000', credentials: true,}), function(req, res) {
     var id = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
@@ -15,33 +15,33 @@ router.route('/add-to-cart/:id').get(function(req, res) {
         }
         cart.add(product, id);
         req.session.cart = cart;
+        req.session.save();
         console.log(req.session.cart);
-        res.json('Added to cart');
+        res.json(req.session.cart);
     });
 });
 
-router.route('/reduce/:id').get(function(req, res, next) {
+router.get('/reduce/:id', cors({origin: 'http://localhost:3000', credentials: true,}), function(req, res, next) {
     var id = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
-    console.log(cart);
     cart.reduceOne(id);
     req.session.cart = cart;
     res.json('reduced by one');
 });
 
-router.route('/remove/:id').get(function(req, res, next) {
+router.get('/remove/:id', cors({origin: 'http://localhost:3000', credentials: true,}), function(req, res, next) {
     var id = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
-    console.log(cart);
     cart.remove(id);
     req.session.cart = cart;
     res.json('removed from cart');
 });
 
-router.route('/shopping-cart').get(function(req, res, next) {
+router.get('/shopping-cart', cors({origin: 'http://localhost:3000', credentials: true,}), function(req, res, next) {
+    console.log(req.session);
     if (!req.session.cart) {
         return res.json({
-          books: null
+          books: null,
         });
     }
     var cart = new Cart(req.session.cart);
