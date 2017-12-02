@@ -5,7 +5,6 @@ import AppHeader from "./Header";
 import "./books/books.css";
 import Lightbox from 'react-image-lightbox';
 import axios from 'axios';
-import CartService from './cart/CartService';
 const queryString = require('query-string');
 const today = new Date();
 
@@ -21,17 +20,14 @@ class BookSingle extends Component {
       lBoxOpen: false,
       buttonLabel: "ADD TO CART",
     }
-    this.cart = new CartService();
   }
 
   componentDidMount()
   {
     var parsed = queryString.parse(this.props.location.search);
-    console.log("Query string: " + parsed.isbn); // replace param with your own
     var htmlReq = 'http://localhost:4200/books/findByISBN/' + parsed.isbn;
       axios.get(htmlReq)
       .then((response) => {
-        console.log("Book isbn: " + response.data[0]);
         this.setState({
           book: response.data
         });
@@ -87,7 +83,16 @@ class BookSingle extends Component {
     }
   }
   addToCart(data){
-    this.cart.addToCart(data, data[0]._id);
+      axios.get('http://localhost:4200/cart/add-to-cart/' + data[0]._id, {withCredentials: true})
+      .then((response) => {
+          this.setState({
+              buttonLabel: "✔ ADDED"
+          }, function(){
+              setTimeout(() => {
+                  this.setState({ buttonLabel: "ADD TO CART" });
+              }, 5000);
+          });
+      });
   }
 
   render() {

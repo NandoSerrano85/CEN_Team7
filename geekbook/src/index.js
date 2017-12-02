@@ -11,6 +11,7 @@ import Login from './components/profile/Login';
 import Signup from './components/profile/AddUser';
 import Profile from './components/profile/Profile';
 import Cart from './components/cart/Cart';
+import Checkout from './components/cart/Checkout';
 import AuthorView from './components/books/AuthorView';
 
 ReactDOM.render(
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route path='/add-user' component={Signup} />
             <Route path='/profile/:id' component={Profile} />
             <Route path='/cart' component={Cart}/>
+            <Route path='/checkout' component={Checkout}/>
             <Route path='/author-view' component={AuthorView}/>
         </div>
     </Router>,

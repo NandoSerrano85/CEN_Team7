@@ -24,7 +24,7 @@ var detailsRouter = require('./src/routes/DetailsRouter');
 var cartRouter = require('./src/routes/CartRouter');
 var userRouter = require('./src/routes/UserRouter');
 
-// exp.use(flash());
+exp.use(flash());
 exp.use(validator());
 exp.use(express.static('public'));
 exp.use(cors());
@@ -43,9 +43,6 @@ exp.use('/user', userRouter);
 exp.use(passport.initialize());
 exp.use(passport.session());
 exp.use(function(req, res, next) {
-    // res.header("Access-Control-Allow-Origin", "http://localhost:4200/cart/shopping-cart");
-    // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    // res.header("Access-Control-Allow-Credentials", true);
     res.locals.session = req.session;
     return next();
 });

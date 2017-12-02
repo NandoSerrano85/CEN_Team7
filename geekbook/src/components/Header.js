@@ -10,6 +10,7 @@ class Header extends Component {
         this.state = {
           loggedIn:false,
           id: '',
+          cart_qty: '',
         }
     }
 
@@ -26,6 +27,13 @@ class Header extends Component {
           }
         }
         catch(err) {};
+        axios.get('http://localhost:4200/cart/shopping-cart', {withCredentials: true})
+        .then((response) => {
+            this.setState({ cart_qty: response.data.Qty })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
 
     }
     getCookie(cname) {
@@ -70,7 +78,7 @@ class Header extends Component {
                         </NavDropdown>
                         )}
                         <NavItem eventKey={3} href="/cart">
-                            <Glyphicon glyph="shopping-cart" />
+                            <Glyphicon glyph="shopping-cart" /><span className="badge">{this.state.cart_qty}</span>
                         </NavItem>
                     </Nav>
                 </Navbar.Collapse>

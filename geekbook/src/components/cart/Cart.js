@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import CartService from './CartService';
 import Header from '../Header';
 import '../../App.css';
 
@@ -11,7 +10,6 @@ class Cart extends Component{
         this.state = {
             cart: []
         }
-        this.service = new CartService();
     }
 
     componentDidMount()
@@ -26,7 +24,6 @@ class Cart extends Component{
         })
     }
     displayCart(data){
-        console.log("function called! Cart: " + data.cart.books);
         if (data.cart.books){
             const cartList = data.cart.books.map((d) => <li className="list-group-item" key={d.product._id}>
                 <span className="badge">QTY: {d.qty}</span>
@@ -35,8 +32,8 @@ class Cart extends Component{
                 <div className="btn-group">
                     <button className="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Options <span class="caret"></span></button>
                     <ul className="dropdown-menu">
-                        <li><a href="/reduce/{{this.item._id}}">Reduce by 1</a></li>
-                        <li><a href="/remove/{{this.item._id}}">Remove</a></li>
+                        <li><a href={"http://localhost:4200/cart/reduce/" + d.product._id}>Reduce by 1</a></li>
+                        <li><a href={"http://localhost:4200/cart/remove/" + d.product._id}>Remove</a></li>
                     </ul>
                 </div>
             </li>);

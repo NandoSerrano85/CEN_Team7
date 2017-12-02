@@ -38,6 +38,9 @@ body {
 .btn-group{
     padding:5px;
 }
+.badge{
+    margin-left:10px;
+}
 .login {
 	margin-top: 75px;
 }
